@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All superviser</title>
+</head>
+<body>
+    <h1>Superviser</h1>
+    {% for usr in user %}
+    {% for a in usr.superviser_set.all %}
+    {{a.superviser_name}}n
+    {% endfor %}
+    {% if usr.is_superuser %}
+    {% else %}
+    <a href="{% url 'supervisertask' usr.id %}">{{usr.username}}</a><br>
+    {% endif %}
+    {% endfor %}
+    <a href="{% url 'superviser_register' %}">Add New Superviser</a>
+</body>
+</html>

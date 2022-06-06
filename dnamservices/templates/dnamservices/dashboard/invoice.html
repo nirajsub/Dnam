@@ -1,0 +1,14 @@
+
+
+<h1>Invoice In</h1>
+{% for invoice in invoicein %}
+{{invoice.name}}
+<a href="{{invoice.in_image.url}}"><img src="{{invoice.in_image.url}}" alt="pdf file| click to view" style="width:200px; height:200px;"/></a>
+{% endfor %}
+<a href="{% url 'addinvoicein' %}">Add invoice In</a>
+<h1>Invoice Out</h1>
+{% for invoice in invoiceout %}
+{{invoice.name}}
+<img src="{{invoice.out_image.url}}" style="height: 200px; width: 200px;">
+{% endfor %}
+<a href="{% url 'addinvoiceout' %}">Add invoice out</a>

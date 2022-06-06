@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint task</title>
+</head>
+<body>
+    Complaints
+{% for task in complainttask %}
+{{task.workorder}}<a href="{% url 'complaintsupdate' task.id %}">edit</a><br>
+{% endfor %}
+<br>
+<a href="{% url 'add_complaints' %}">Add complaint task</a>
+</body>
+</html>

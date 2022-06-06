@@ -1,0 +1,7 @@
+
+
+{% for emp in employee %}
+<a href="{% url 'employeetasks' emp.id %}">{{emp.employee_name}}</a><a href="{% url 'editemployee' emp.id %}">Edit</a><br>
+{% endfor %}
+<a href="{% url 'addemployee' %}">add employee</a>
+<a href="{% url 'addsuperemployee' %}">Add superviser as employee</a>

@@ -1,0 +1,9 @@
+
+{{client.client_name}}<br>
+{{client.id}}<br>
+
+{% for sites in client.sites_set.all %}
+<a href="{% url 'editsite' sites.id %}">{{sites.site_name}}</a> <a href="{% url 'addworkingdays' sites.id %}">working days</a><a href="{% url 'sitetasks' sites.id  %}">tasks</a><br>
+{% endfor %}
+
+<a href="{% url 'addsite' client.id %}">Add sites</a>

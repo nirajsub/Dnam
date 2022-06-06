@@ -1,0 +1,6 @@
+
+
+{% for client in client %}
+<a href="{% url 'clientsites' client.id %}">{{client.client_name}}</a><a href="{% url 'editclients' client.id %}">edit</a><br>
+{% endfor %}
+<a href="{% url 'addclients' %}">Add client</a>
