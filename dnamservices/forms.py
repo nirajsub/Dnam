@@ -89,3 +89,8 @@ class AddInvoiceOutForm(forms.ModelForm):
         model = InvoiceOut
         fields = '__all__'
         exclude = ['delete']
+    
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contacts
+        fields = '__all__'

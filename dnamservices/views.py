@@ -9,9 +9,54 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from .models import *
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'dnamservices/users/change_password.html', {
+        'form': form
+    })
+
 def HomeView(request):
     template_name = "dnamservices/home.html"
-    service = Services.objects.all()
+    service = Services.objects.all().order_by('-id')[0:3]
+    form = ContactForm()
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("home")
+    context = {
+        'service':service
+    }
+    return render(request, template_name, context)
+
+def AboutUsView(request):
+    template_name = "dnamservices/aboutus.html"
+    return render(request, template_name)
+
+def ServicesView(request):
+    template_name = "dnamservices/services.html"
+    service = Services.objects.all().order_by('-id')
+    context = {
+        'service':service
+    }
+    return render(request, template_name, context)
+
+def ServiceDetailView(request, pk):
+    template_name = "dnamservices/servicedetail.html"
+    service = Services.objects.get(id=pk)
     context = {
         'service':service
     }

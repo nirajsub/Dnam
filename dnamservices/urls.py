@@ -7,6 +7,9 @@ from .import views
 
 urlpatterns = [
     path('', HomeView, name = "home"),
+    path('aboutus', AboutUsView, name = "aboutus"),
+    path('services', ServicesView, name="services"),
+    path('service-detail/<str:pk>', ServiceDetailView, name="servicedetail"),
     path('dashboard/', DashboardView, name="dashboard"),
 
     path('workorder/', WorkorderTaskView, name='workorder'),
@@ -42,6 +45,8 @@ urlpatterns = [
 
     path("superviser-register/", SuperviserRegistrationView.as_view(), name="superviser_register"),
     path("superviser-login/", SuperviserLoginView.as_view(), name="superviser_login"),
+
+     path(r'^password/$', views.change_password, name='change_password'),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

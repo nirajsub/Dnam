@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 
 
@@ -12,6 +13,7 @@ class Client(models.Model):
 
     def __str__(self):
         return self.client_name
+
 
 class Employee(models.Model):
     employee_user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -37,6 +39,8 @@ class Superviser(models.Model):
 class Services(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='media/services')
+    detail = models.TextField()
+    fade = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -131,4 +135,11 @@ class InvoiceOut(models.Model):
     def __str__(self):
         return self.name
 
+class Contacts(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    phone = PhoneNumberField()
+    message = models.TextField()
 
+    def __str__(self):
+        return self.name
